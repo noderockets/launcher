@@ -83,6 +83,10 @@ launcher.on('ready', () => {
   log.log(`Launcher connected`);
 });
 
+launcher.on('error', (error) => {
+  log.log(`Error: ${error}`);
+});
+
 // Initialize Controller
 const controller = new Controller();
 

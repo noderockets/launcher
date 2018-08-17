@@ -6,6 +6,9 @@ class Launcher extends EventEmitter {
   constructor(deviceId, token, opts) {
     super();
 
+    this.deviceId = deviceId;
+    this.token = token;
+
     this.opts = Object.assign({}, {
       launchPin: 2,
       airPin: 0,
@@ -19,11 +22,29 @@ class Launcher extends EventEmitter {
     this.ready = false;
     this.pressure = -1;
 
+    // let initInterval = setInterval(() => {
+    //   if (!this.ready) {
+    //     this.initBoard();
+    //   } else {
+    //     clearInterval(initInterval)
+    //   }
+    // }, 10000);
+
+    this.initBoard();
+  }
+
+  initBoard() {
+    const particle = new Particle({
+      token: this.token,
+      deviceId: this.deviceId
+    });
+
+    particle.on("error", (error) => {
+      this.emit("error", error);
+    })
+
     this.board = new five.Board({
-      io: new Particle({
-        token,
-        deviceId
-      }),
+      io: particle,
       repl: false,
       debug: false
     });
@@ -39,8 +60,8 @@ class Launcher extends EventEmitter {
         let voltage = val * 3.3 / 4095
 
         // Solve for Z2
-        // Vout = (Z2 / (Z1 + Z2))*Vin
-        // Z2 = 270 / ((3.3 / voltage) - 1)
+        // Vout = (Z2 / (Z1 + Z2)) * Vin
+        // Z2 = Z1 / ((Vin / Vout) - 1)
         let z2 = this.opts.z1 / ((3.3 / voltage) - 1);
 
         this.pressure = (this.opts.slope * z2) + this.opts.yint;
@@ -48,28 +69,38 @@ class Launcher extends EventEmitter {
 
       this.ready = true;
       this.emit('ready');
-    })
+    });
+
+    this.board.on('error', (error) => {
+      this.emit("error", error)
+    });
   }
 
   openAir() {
-    this.board.digitalWrite(this.opts.airPin, 1);
+    if (this.ready)
+      this.board.digitalWrite(this.opts.airPin, 1);
   }
 
   closeAir() {
-    this.board.digitalWrite(this.opts.airPin, 0);
+    if (this.ready)
+      this.board.digitalWrite(this.opts.airPin, 0);
   }
 
   openWater() {
-    this.board.digitalWrite(this.opts.waterPin, 1);
+    if (this.ready)
+      this.board.digitalWrite(this.opts.waterPin, 1);
   }
 
   closeWater() {
-    this.board.digitalWrite(this.opts.waterPin, 0);
+    if (this.ready)
+      this.board.digitalWrite(this.opts.waterPin, 0);
   }
 
   launch(waitToClose = 1000) {
-    this.board.digitalWrite(this.opts.launchPin, 1);
-    setTimeout(() => this.board.digitalWrite(this.opts.launchPin), waitToClose);
+    if (this.ready) {
+      this.board.digitalWrite(this.opts.launchPin, 1);
+      setTimeout(() => this.board.digitalWrite(this.opts.launchPin), waitToClose);
+    }
   }
 }
 
