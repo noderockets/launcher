@@ -13,7 +13,8 @@ LEDStatus blinkRed(RGB_COLOR_RED, LED_PATTERN_BLINK, LED_SPEED_FAST);
 LEDStatus blinkBlue(RGB_COLOR_BLUE, LED_PATTERN_BLINK, LED_SPEED_FAST);
 LEDStatus blinkGreen(RGB_COLOR_GREEN, LED_PATTERN_BLINK, LED_SPEED_FAST);
 
-void setup() {
+void setup()
+{
     // Setup PINs
     pinMode(launchPin, OUTPUT);
     pinMode(airPin, OUTPUT);
@@ -26,18 +27,19 @@ void setup() {
     digitalWrite(waterPin, LOW);
 
     // Expose functions
-    Particle.function("airOpen", airValveOpen);
-    Particle.function("airClose", airValveClose);
-    Particle.function("waterOpen", waterValveOpen);
-    Particle.function("waterClose", waterValveClose);
-    Particle.function("fire", fire);
+    Particle.function("openAir", airValveOpen);
+    Particle.function("closeAir", airValveClose);
+    Particle.function("openWater", waterValveOpen);
+    Particle.function("closeWater", waterValveClose);
+    Particle.function("launch", launch);
     Particle.variable("pressure", pressure);
 
     // Particle.subscribe("panic", panicHandler);
     Particle.variable("version", VERSION);
 }
 
-void loop() {
+void loop()
+{
     int pinValue = analogRead(pressurePin);
     pressure = pinValue;
 
@@ -52,35 +54,40 @@ void loop() {
     // pressure = (z2 * slope) - yint;
 }
 
-int airValveOpen(String command) {
+int airValveOpen(String command)
+{
     blinkBlue.setActive(true);
     Particle.publish("air-valve-open");
     digitalWrite(airPin, HIGH);
     return 1;
 }
 
-int airValveClose(String command) {
+int airValveClose(String command)
+{
     blinkBlue.setActive(false);
     Particle.publish("air-valve-close");
     digitalWrite(airPin, LOW);
     return 1;
 }
 
-int waterValveOpen(String command) {
+int waterValveOpen(String command)
+{
     blinkGreen.setActive(true);
     Particle.publish("water-valve-open");
     digitalWrite(waterPin, HIGH);
     return 1;
 }
 
-int waterValveClose(String command) {
+int waterValveClose(String command)
+{
     blinkGreen.setActive(false);
     Particle.publish("water-valve-close");
     digitalWrite(waterPin, LOW);
     return 1;
 }
 
-int fire(String command) {
+int launch(String command)
+{
     Particle.publish("fire");
     blinkRed.setActive(true);
     digitalWrite(launchPin, HIGH);

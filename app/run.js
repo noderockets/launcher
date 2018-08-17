@@ -4,7 +4,7 @@ const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 const screen = blessed.screen();
 const grid = new contrib.grid({ rows: 3, cols: 3, screen: screen });
-const config = require('../config.json');
+const config = require('./config.json');
 
 // grid.set(0, 0, 1, 2, contrib.picture, {
 //   file: '../nrlogo.png',
