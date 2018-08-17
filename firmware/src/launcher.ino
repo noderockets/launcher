@@ -3,8 +3,8 @@ const int airPin = D1;
 const int waterPin = D0;
 const int pressurePin = A0;
 
-const double slope = -0.46511;
-const double yint = -93.95;
+const double slope = .54789;
+const double yint = -2.22689;
 
 double pressure = 0;
 int VERSION = 1.0;
@@ -43,15 +43,15 @@ void loop()
     int pinValue = analogRead(pressurePin);
     pressure = pinValue;
 
-    // photon reads voltage in increments of 1/4095 of 3.3v
-    // double voltage = pinValue * 3.3 / 4095;
+    photon reads voltage in increments of 1/4095 of 3.3v
+    double voltage = pinValue * 3.3 / 4095;
 
-    // // voltage divider solve for z2 with vin = 3.3 and z1 = 270
-    // double z2 = 270 / ((3.3 / voltage) - 1);
+    // voltage divider solve for z2 with vin = 3.3 and z1 = 270
+    double z2 = 270 / ((3.3 / voltage) - 1);
 
     // // use linear equation with confirmed slope and y-intercept to
     // // solve for pressure
-    // pressure = (z2 * slope) - yint;
+    pressure = (z2 * slope) - yint;
 }
 
 int airValveOpen(String command)

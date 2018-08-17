@@ -15,8 +15,8 @@ class Launcher extends EventEmitter {
       waterPin: 1,
       pressurePin: 'A0',
       z1: 270,
-      slope: 1.825,
-      yint: 3.75
+      slope: .54789,
+      yint: -2.22689
     }, opts);
 
     this.ready = false;
@@ -40,6 +40,7 @@ class Launcher extends EventEmitter {
     });
 
     particle.on("error", (error) => {
+      console.log(error)
       this.emit("error", error);
     })
 
