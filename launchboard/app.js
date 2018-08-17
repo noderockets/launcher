@@ -43,7 +43,7 @@ let currentPressureDonut = grid.set(0, 2, 1, 1, contrib.donut, {
   radius: 24,
   arcWidth: 12,
   yPadding: 2,
-  data: [{ label: 'PSI', percent: 62 }]
+  data: [{ label: 'PSI', percent: 0 }]
 });
 
 const lcd = grid.set(2, 2, 1, 1, contrib.lcd, {
@@ -51,7 +51,7 @@ const lcd = grid.set(2, 2, 1, 1, contrib.lcd, {
   segmentInterval: 0.11, // spacing between the segments in % so 50% = 0.550% = 0.5
   strokeWidth: 0.11, // spacing between the segments in % so 50% = 0.5
   elements: 3, // how many elements in the display. or how many characters can be displayed.
-  display: 092, // what should be displayed before first call to setDisplay
+  display: '???', // what should be displayed before first call to setDisplay
   elementSpacing: 4, // spacing between each element
   elementPadding: 2, // how far away from the edges to put the elements
   color: 'green', // color for the segments
@@ -60,7 +60,7 @@ const lcd = grid.set(2, 2, 1, 1, contrib.lcd, {
 
 const pressureLine = grid.set(1, 0, 1, 3, contrib.line, {
   showNthLabel: 5,
-  maxY: 150,
+  maxY: 200,
   label: 'PSI',
   showLegend: true,
   legend: { width: 10 }
@@ -110,8 +110,7 @@ controller.on('close-water', () => {
 
 controller.on('launch', () => {
   log.log('Launch');
-  // TODO - set PSI lcd
-  lcd.setDisplay('000');
+  lcd.setDisplay(launcher.pressure);
   launcher.launch();
 });
 
@@ -121,12 +120,10 @@ const pressureData = {
   x: [],
   y: []
 }
-let pressureReadings = [];
 
-var i = 0;
+let i = 0;
 function updatePressure() {
-  // var pressure = launcher.pressure / 10;
-  var pressure = Math.random() * 100;
+  let pressure = launcher.pressure;
   pressureData.x.push(i++);
   pressureData.x = pressureData.x.slice(-100);
   pressureData.y.push(pressure);
@@ -135,9 +132,7 @@ function updatePressure() {
   pressureLine.setData(pressureData);
   screen.render();
 
-  // log.log(`${pressure}`);
-
-  var color = 'cyan';
+  let color = 'cyan';
   if (pressure >= 50) color = 'green';
   if (pressure >= 75) color = 'yellow';
   if (pressure >= 100) color = 'red';
@@ -145,11 +140,5 @@ function updatePressure() {
 }
 
 setInterval(updatePressure, 100);
-
-// setInterval(() => {
-//   pressureData.y = pressureReadings;
-//   pressureLine.setData(pressureData);
-//   screen.render();
-// }, 100)
 
 

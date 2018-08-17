@@ -10,7 +10,10 @@ class Launcher extends EventEmitter {
       launchPin: 2,
       airPin: 0,
       waterPin: 1,
-      pressurePin: 'A0'
+      pressurePin: 'A0',
+      z1: 270,
+      slope: 1.825,
+      yint: 3.75
     }, opts);
 
     this.ready = false;
@@ -32,8 +35,15 @@ class Launcher extends EventEmitter {
       this.board.pinMode(this.opts.pressurePin, five.Pin.INPUT);
 
       this.board.analogRead(this.opts.pressurePin, (val) => {
-        // TODO - calculate pressure
-        this.pressure = val;
+        // Photon reads voltage in increments of 1/4095 of 3.3V
+        let voltage = val * 3.3 / 4095
+
+        // Solve for Z2
+        // Vout = (Z2 / (Z1 + Z2))*Vin
+        // Z2 = 270 / ((3.3 / voltage) - 1)
+        let z2 = this.opts.z1 / ((3.3 / voltage) - 1);
+
+        this.pressure = (this.opts.slope * z2) + this.opts.yint;
       })
 
       this.ready = true;
