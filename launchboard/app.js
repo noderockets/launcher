@@ -6,8 +6,6 @@ const screen = blessed.screen();
 const grid = new contrib.grid({ rows: 3, cols: 3, screen: screen });
 const config = require('../config.json');
 
-console.log(config.particle);
-
 // grid.set(0, 0, 1, 2, contrib.picture, {
 //   file: '../nrlogo.png',
 //   cols: 50,

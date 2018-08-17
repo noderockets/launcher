@@ -1,15 +1,20 @@
 const EventEmitter = require('events').EventEmitter;
 const gamepad = require('gamepad');
+const keypress = require('keypress');
 
 class LauncherController extends EventEmitter {
   constructor() {
     super();
     gamepad.init();
+    keypress(process.stdin);
+
     // Create a game loop and poll for events
     setInterval(gamepad.processEvents, 16);
     // Scan for new gamepads as a slower rate
     setInterval(gamepad.detectDevices, 500);
     this.attachListeners();
+    this.waterPressed = false;
+    this.airPressed = false;
   }
 
   attachListeners() {
@@ -49,6 +54,29 @@ class LauncherController extends EventEmitter {
           break;
       }
     });
+
+    process.stdin.on('keypress', (ch, key) => {
+      let k = key.name;
+      switch (k) {
+        case 'f':
+          this.airPressed ? this.emit('close-air') : this.emit('open-air');
+          this.airPressed = !this.airPressed;
+          break;
+        case 'j':
+          this.waterPressed ? this.emit('close-water') : this.emit('open-water');
+          this.waterPressed = !this.waterPressed;
+          break;
+        case 'space':
+        case 'l':
+          this.emit('launch');
+          break;
+      }
+
+      this.lastkey = key.name;
+    })
+
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
   }
 }
 
