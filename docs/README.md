@@ -1,3 +1,5 @@
+![NodeRocket Logo](images/nrlogo.png)
+
 # NodeRocket Launcher
 
 - [Overview](overview.md)
@@ -5,4 +7,4 @@
 - [Particle Photon](particle.md)
 - [Building an Application](application.md)
 - [Using NodeJS](using-nodejs.md)
-- [Sample Applications](sample-apps.md)
+- [Sample Applications](sample-apps.md)git 
