@@ -40,7 +40,7 @@ class Launcher extends EventEmitter {
     });
 
     particle.on("error", (error) => {
-      console.log(error)
+      // console.log(error)
       this.emit("error", error);
     })
 

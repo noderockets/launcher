@@ -24,14 +24,26 @@ class LauncherController extends EventEmitter {
       //   num: num
       // });
 
+
+      // PS3
       switch (num) {
-        case 4: // Left Button, stop water
+        case 10: // Left Button, stop water
           this.emit('close-water');
           break;
-        case 6: // Left Trigger, stop air
+        case 8: // Left Trigger, stop air
           this.emit('close-air');
           break;
       }
+
+      // Logitech
+      // switch (num) {
+      //   case 4: // Left Button, stop water
+      //     this.emit('close-water');
+      //     break;
+      //   case 6: // Left Trigger, stop air
+      //     this.emit('close-air');
+      //     break;
+      // }
     });
 
     gamepad.on('down', (id, num) => {
@@ -40,19 +52,35 @@ class LauncherController extends EventEmitter {
       //   num: num
       // });
 
+      // PS3 Remote
       switch (num) {
-        case 4: // Left Button, fill water
+        case 10: // Left Button, fill water
           this.emit('open-water');
           break;
-        case 6: // Left Trigger, fill air
+        case 8: // Left Trigger, fill air
           this.emit('open-air');
           break;
-        case 1:
-        case 5:
-        case 7: // Right Trigger, launch
+        case 11:
+        case 9:
+        case 14: // Right Trigger, launch
           this.emit('launch');
           break;
       }
+
+      // Logitech
+      // switch (num) {
+      //   case 4: // Left Button, fill water
+      //     this.emit('open-water');
+      //     break;
+      //   case 6: // Left Trigger, fill air
+      //     this.emit('open-air');
+      //     break;
+      //   case 1:
+      //   case 5:
+      //   case 7: // Right Trigger, launch
+      //     this.emit('launch');
+      //     break;
+      // }
     });
 
     process.stdin.on('keypress', (ch, key) => {
