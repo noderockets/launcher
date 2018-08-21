@@ -7,4 +7,4 @@
 - [Particle Photon](particle.md)
 - [Building an Application](application.md)
 - [Using NodeJS](using-nodejs.md)
-- [Sample Applications](sample-apps.md)git 
+- [Sample Applications](sample-apps.md) 
