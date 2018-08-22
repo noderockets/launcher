@@ -14,7 +14,7 @@ We have created a custom circuit board that integrates with a [Particle Photon](
 
 ![Photon](images/photon.jpg)
 
-![Photon](images/photon_vector2_600.png | width=200)
+![NodeRocket Board](images/board.jpg)
 
 Each of the valves is controlled by writing to a digital logic pin on the Photon. By writing `HIGH/LOW` to the pins you can switch the valves `ON` and `OFF`. 
 
@@ -27,3 +27,9 @@ The platorm also utilizes an oil pressure sensor to calculate the PSI that the r
 ![Oil Pressure Sensor](images/oilpresssensor.jpg)
 
 The pressure (PSI) of the rocket can be calculated using the value read from the analog pin `A0`.  See [Calculating PSI of rocket](psi.md) for more information.
+
+
+### Resources:
+
+- [US Water Rockets](http://www.uswaterrockets.com/)
+- [Particle IO](http://particle.io)
