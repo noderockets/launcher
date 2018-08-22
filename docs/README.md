@@ -1,4 +1,4 @@
-![NodeRocket Logo](images/nrlogo.png)
+![NodeRocket Logo](images/nr-logo-light.png)
 
 # NodeRocket Launcher
 

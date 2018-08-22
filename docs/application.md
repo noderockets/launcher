@@ -3,7 +3,7 @@
 ## Getting Started
 Particle provides a [Web IDE](https://docs.particle.io/guide/getting-started/build/photon/) that you can use to build applications for the Photon.  Applications are basically custom firmware that run whenever the device is powered up.  
 
-Native applications for the photon are written using a C++ like language and are very much like Arduino [sketches](https://www.arduino.cc/en/Tutorial/Sketch). The two main parts of an application is the `setup` and `loop` functions.  The `setup` function runs once when the device is first powered on the `loop` runs continuously.  
+Native applications for the photon are written using a C++ like language and are very much like Arduino [sketches](https://www.arduino.cc/en/Tutorial/Sketch). The two main parts of an application is the `setup` and `loop` functions.  The `setup` function runs once when the device is first powered and the the `loop` function runs continuously.  
 
 #### Example: Blinking an LED
 
@@ -25,7 +25,7 @@ void loop() {
 
 When you are ready to run your code on your device you can use the the Web IDE to compile and flash the new code onto the photon.
 
-For more detailed information on building applications for the [Getting Started](https://docs.particle.io/guide/getting-started/build/photon/) tutorials or [Code Examples](https://docs.particle.io/guide/getting-started/examples/photon/) on Particle's site.
+For more detailed information on building applications for the Photon, see the [Getting Started](https://docs.particle.io/guide/getting-started/build/photon/) tutorials or [Code Examples](https://docs.particle.io/guide/getting-started/examples/photon/) on Particle's site.
 
 ## Using Particle's Cloud API
 
@@ -41,13 +41,13 @@ void setup(){
 
   // Register cloud functions
 
-  // POST /v1/devices/{DEVICE_ID}/on
+  // Expose POST /v1/devices/{DEVICE_ID}/on
   Particle.function("on", on);    
 
-  // POST /v1/devices/{DEVICE_ID}/off
+  // Expose POST /v1/devices/{DEVICE_ID}/off
   Particle.function("off", off);  
 
-  // GET  /v1/devices/{DEVICE_ID}/isOn
+  // Expose GET  /v1/devices/{DEVICE_ID}/isOn
   Particle.variable("isOn", on);  
 }
 
@@ -168,3 +168,5 @@ curl "https://api.particle.io/v1/devices/{DEVICE_ID}/airClose" \
 # Get Pressure Value
 curl "https://api.particle.io/v1/devices/{DEVICE_ID}/pressure?access_token={ACCESS_TOKEN}"
 ```
+
+If you are interested in learning how to program the Photon using JavaScript, see the [Using NodeJS](using-node.js) page.
