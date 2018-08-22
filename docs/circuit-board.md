@@ -4,3 +4,5 @@ Of those GPIO pins, 3 are used to control the launch by sending a signal to thre
 th a pneumatic cylinder which powers the release mechanism which sends the rocket into the air.
 
 ![Circuit Board](images/circuit-design.png "Board Text 1")
+
+![Circuit Board](images/schematic.png "Board Text 1")
