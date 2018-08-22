@@ -13,7 +13,7 @@ For the rocket launcher activity, you will need to follow the steps below:
   You can also use their [CLI](https://docs.particle.io/guide/tools-and-features/cli/photon/) tools to setup and interact with your particle devices.
 
 
-4. Use Tinker to control the launcher.
+<H2>4. Use Tinker to control the launcher.</H2>
 
 After setting up the photon, then you can use the same particle app to control the photon. 
 
