@@ -5,4 +5,4 @@ th a pneumatic cylinder which powers the release mechanism which sends the rocke
 
 <img src="images/circuit-design.png" width="200" />
 
-![Circuit Board](images/schematic.png "Board Text 1") 
+![Circuit Board](images/schematic.png) 
