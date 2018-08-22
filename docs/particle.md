@@ -11,3 +11,7 @@ To get started with your Photon you can follow the [Getting Started](https://doc
 ### Using Tinker to Control the Launcher
 
 // TODO
+
+
+
+https://docs.particle.io/guide/getting-started/start/core/#step-1-power-on-your-device
