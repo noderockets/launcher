@@ -17,7 +17,11 @@ There are a couple of reasons.
 
 First, the valves require 12 volts, the GPIO pins only source 3.3 volts. 
 
-Second, electromagnetic valves take more current than the photon can supply. even if the valves could operate at 3.3V, the amount of current could damage the photon, or any GPIO device. So it is important to isolate the supply current of external devices by using a switching transistor. In this design there is an NPN transistor switching a higher voltage MOSFET transistor. The MOSFET can handle more power 
+Second, electromagnetic valves take more current than the photon can supply. even if the valves could operate at 3.3V, the amount of current could damage the photon, or any GPIO device. 
+
+So it is important to isolate the supply current of external devices by using a switching transistor. 
+
+In this design there is an NPN transistor switching a higher voltage MOSFET transistor. The MOSFET can handle more power 
 
 Below is a view of the schematic layed out as a printed circuit board. This is the same board you will be working with.
 
