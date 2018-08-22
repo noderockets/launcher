@@ -24,5 +24,4 @@ Below is a view of the schematic layed out as a printed circuit board. This is t
 <img style = "display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%" src="images/circuit-design.png"  /> 
-![Circuit Board]() 
+    width: 75%" src="images/circuit-design.png"  /> 
