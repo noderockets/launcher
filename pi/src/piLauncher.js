@@ -8,6 +8,11 @@ const board = five.Board({
 
 board.on('ready', () => {
     const led = new five.Led('P1-12');
-    led.blink();
+    led.fadeIn();
+    setTimeout(function(){
+        led.fadeOut()
+    },(3 * 1000));
+    
+    
 });
 
