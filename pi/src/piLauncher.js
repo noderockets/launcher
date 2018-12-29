@@ -2,7 +2,7 @@
 const five = require('johnny-five');
 const Raspi = require('raspi-io');
 
-const board = five.board({
+const board = five.Board({
     io: new Raspi()
 });
 
